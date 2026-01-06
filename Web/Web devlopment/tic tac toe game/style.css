@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+/* Glassmorphism Card */
+.glass-panel {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Glowing Text */
+.text-glow {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+/* Grid & Tiles */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tile {
+    aspect-ratio: 1;
+    min-width: 100px;
+    min-height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+}
+
+.tile:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.tile.winning {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.6), inset 0 0 20px rgba(239, 68, 68, 0.3);
+    animation: pulse-win 1.5s infinite;
+}
+
+@keyframes pulse-win {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.6), inset 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.8), inset 0 0 30px rgba(239, 68, 68, 0.5);
+    }
+}
+
+/* Star Rating Animation */
+.star {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s ease-out;
+}
+
+.star.active {
+    opacity: 1;
+    transform: scale(1);
+    color: #fbbf24;
+    text-shadow: 0 0 10px #fbbf24;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* QR Code Styling */
+#qrcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+#qrcode img {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* QR Scanner Camera */
+#qr-reader {
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#qr-reader video {
+    border-radius: 12px;
+    width: 100% !important;
+}
+
+#qr-reader__scan_region {
+    border-radius: 12px !important;
+}

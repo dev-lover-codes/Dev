@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #0f172a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .success {
+            color: #10b981;
+        }
+
+        .error {
+            color: #ef4444;
+        }
+
+        .test {
+            margin: 10px 0;
+            padding: 10px;
+            background: #1e293b;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 Tic-Tac-Toe Diagnostic Test</h1>
+    <div id="results"></div>
+
+    <script type="module">
+        const results = document.getElementById('results');
+
+        function addTest(name, success, message) {
+            const div = document.createElement('div');
+            div.className = 'test';
+            div.innerHTML = `
+                <span class="${success ? 'success' : 'error'}">
+                    ${success ? '✅' : '❌'} ${name}
+                </span>
+                <br><small>${message}</small>
+            `;
+            results.appendChild(div);
+        }
+
+        // Test 1: Module Support
+        addTest('ES6 Modules', true, 'Browser supports ES6 modules');
+
+        // Test 2: Import Store
+        try {
+            const { store } = await import('./src/store.js');
+            addTest('Store Import', true, 'store.js loaded successfully');
+        } catch (e) {
+            addTest('Store Import', false, `Error: ${e.message}`);
+        }
+
+        // Test 3: Import Views
+        try {
+            const { renderWelcome } = await import('./src/views/welcome.js');
+            addTest('Views Import', true, 'welcome.js loaded successfully');
+        } catch (e) {
+            addTest('Views Import', false, `Error: ${e.message}`);
+        }
+
+        // Test 4: Import AI
+        try {
+            const { AI } = await import('./src/ai.js');
+            addTest('AI Import', true, 'ai.js loaded successfully');
+        } catch (e) {
+            addTest('AI Import', false, `Error: ${e.message}`);
+        }
+
+        // Test 5: Import Database
+        try {
+            const { DB } = await import('./src/database.js');
+            addTest('Database Import', true, 'database.js loaded successfully');
+        } catch (e) {
+            addTest('Database Import', false, `Error: ${e.message}`);
+        }
+
+        // Test 6: Import Main
+        try {
+            await import('./src/main.js');
+            addTest('Main.js Import', true, 'main.js loaded successfully');
+        } catch (e) {
+            addTest('Main.js Import', false, `Error: ${e.message}`);
+        }
+
+        // Test 7: Check DOM
+        setTimeout(() => {
+            const app = document.getElementById('app');
+            if (app) {
+                addTest('App Container', true, 'App div found in DOM');
+            } else {
+                addTest('App Container', false, 'App div NOT found');
+            }
+        }, 100);
+    </script>
+
+    <!-- Add app div for testing -->
+    <div id="app" style="display:none;"></div>
+</body>
+
+</html>
